@@ -1,36 +1,169 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rachid Abbou — Portfolio
 
-## Getting Started
+**Portfolio professionnel bilingue (Français / English)** présentant mon parcours, mes compétences, mes expériences et mes projets dans le développement logiciel.
 
-First, run the development server:
+## Présentation
+
+Ce portfolio a pour objectif de présenter mon profil de développeur Full Stack, avec une orientation particulière vers les applications métier, les logiciels industriels et l'intégration de systèmes.
+
+Il met en valeur mon expérience en développement logiciel, notamment dans les environnements industriels, ainsi que mes compétences en développement web et en conception d'applications.
+
+## Fonctionnalités
+
+- Site bilingue : français et anglais.
+- Présentation du profil et des compétences.
+- Parcours professionnel.
+- Présentation des projets.
+- Présentation des services.
+- Formulaire de contact.
+- Optimisation SEO pour les deux langues.
+- Génération statique des pages.
+
+## Technologies
+
+- **Framework :** Next.js
+- **Frontend :** React
+- **Langage :** TypeScript
+- **Style :** Tailwind CSS
+- **Formulaire :** Web3Forms
+- **Protection anti-spam :** hCaptcha
+- **Hébergement prévu :** Cloudflare Pages
+
+## Installation locale
+
+Prérequis : Node.js et npm.
+
+Cloner le dépôt :
+
+```bash
+git clone https://github.com/rachid-abbou/portfolio.git
+cd portfolio
+```
+
+Installer les dépendances :
+
+```bash
+npm install
+```
+
+Créer un fichier `.env.local` à la racine du projet et y configurer les variables nécessaires au formulaire de contact.
+
+Lancer le serveur de développement :
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir ensuite :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+`http://localhost:3000`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Compilation et export statique
 
-## Learn More
+Pour générer la version de production :
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm run build
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Les fichiers statiques sont générés dans le dossier `out/`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Déploiement
 
-## Deploy on Vercel
+Le déploiement est prévu sur **Cloudflare Pages**, avec une intégration GitHub permettant la publication automatique après chaque mise à jour de la branche principale.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+L'adresse publique sera ajoutée après la première mise en ligne.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Auteur
+
+**Rachid Abbou**
+
+- LinkedIn : [linkedin.com/in/rachid-abbou](https://www.linkedin.com/in/rachid-abbou)
+- GitHub : [github.com/rachid-abbou](https://github.com/rachid-abbou)
+- Contact : rachid.abbou@gmail.com
+
+---
+
+# Rachid Abbou — Professional Portfolio
+
+**Bilingual professional portfolio (French / English)** showcasing my background, skills, professional experience and software development projects.
+
+## Overview
+
+This portfolio presents my profile as a Full Stack Developer, with a focus on business applications, industrial software and system integration.
+
+It highlights my software development experience, particularly in industrial environments, as well as my web development and application design skills.
+
+## Features
+
+- French and English languages.
+- Professional profile and skills.
+- Work experience.
+- Project showcase.
+- Services.
+- Contact form.
+- SEO optimization for both languages.
+- Static page generation.
+
+## Technologies
+
+- **Framework:** Next.js
+- **Frontend:** React
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Contact form:** Web3Forms
+- **Anti-spam protection:** hCaptcha
+- **Planned hosting:** Cloudflare Pages
+
+## Local installation
+
+Requirements: Node.js and npm.
+
+Clone the repository:
+
+```bash
+git clone https://github.com/rachid-abbou/portfolio.git
+cd portfolio
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env.local` file at the project root and configure the variables required by the contact form.
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+Then open:
+
+`http://localhost:3000`
+
+## Build and static export
+
+Generate the production version:
+
+```bash
+npm run build
+```
+
+The static website files are generated in the `out/` directory.
+
+## Deployment
+
+Deployment is planned on **Cloudflare Pages**, connected to GitHub for automatic publishing whenever the main branch is updated.
+
+The public URL will be added after the first deployment.
+
+## Author
+
+**Rachid Abbou**
+
+- LinkedIn: [linkedin.com/in/rachid-abbou](https://www.linkedin.com/in/rachid-abbou)
+- GitHub: [github.com/rachid-abbou](https://github.com/rachid-abbou)
+- Contact: rachid.abbou@gmail.com
