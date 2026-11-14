@@ -2,10 +2,14 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 
 type ContactProps = {
   locale: string;
 };
+
+const HCAPTCHA_SITE_KEY =
+  "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
 
 export default function Contact({ locale }: ContactProps) {
   const isFr = locale === "fr";
@@ -14,8 +18,11 @@ export default function Contact({ locale }: ContactProps) {
     "idle" | "loading" | "success" | "error"
   >("idle");
 
+  const [captchaToken, setCaptchaToken] = useState("");
+  const [captchaKey, setCaptchaKey] = useState(0);
+
   const content = {
-    title: isFr ? "Contact" : "Contact",
+    title: "Contact",
     subtitle: isFr
       ? "Vous avez un projet, une question ou une opportunité professionnelle ? Contactez-moi."
       : "Have a project, a question or a professional opportunity? Feel free to contact me.",
@@ -31,48 +38,64 @@ export default function Contact({ locale }: ContactProps) {
     error: isFr
       ? "Une erreur est survenue. Vous pouvez me contacter directement par e-mail."
       : "An error occurred. You can contact me directly by email.",
-    required: isFr ? "Champ obligatoire" : "Required field",
+    captchaRequired: isFr
+      ? "Veuillez valider le CAPTCHA avant l'envoi."
+      : "Please complete the CAPTCHA before submitting.",
     linkedin: isFr ? "Mon profil LinkedIn" : "My LinkedIn profile",
     direct: isFr ? "Me contacter directement" : "Contact me directly",
   };
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    setStatus("loading");
 
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!captchaToken) {
+      setStatus("error");
+      return;
+    }
+
+    const accessKey =
+      process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
 
     if (!accessKey) {
       setStatus("error");
       return;
     }
 
+    setStatus("loading");
+
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    formData.append("access_key", accessKey);
-    formData.append(
+    formData.set("access_key", accessKey);
+    formData.set(
       "subject",
       `Portfolio - ${formData.get("subject")}`
     );
-    //formData.append("from_name", "Portfolio - Rachid Abbou");
-    formData.set("subject", `Portfolio - ${formData.get("subject")}`);
+    formData.set("h-captcha-response", captchaToken);
+
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const result = await response.json();
 
-      if (result.success) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
+      if (!response.ok || !result.success) {
+        throw new Error("Web3Forms submission failed");
       }
-    } catch {
+
+      setStatus("success");
+      form.reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
       setStatus("error");
+    } finally {
+      setCaptchaToken("");
+      setCaptchaKey((current) => current + 1);
     }
   }
 
@@ -220,9 +243,29 @@ export default function Contact({ locale }: ContactProps) {
                 />
               </div>
 
+              <div className="flex justify-center">
+                <HCaptcha
+                  key={captchaKey}
+                  sitekey={HCAPTCHA_SITE_KEY}
+                  reCaptchaCompat={false}
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setStatus("idle");
+                  }}
+                  onExpire={() => setCaptchaToken("")}
+                  onError={() => setCaptchaToken("")}
+                />
+              </div>
+
+              {status === "error" && !captchaToken && (
+                <p className="text-sm text-red-600">
+                  {content.captchaRequired}
+                </p>
+              )}
+
               <button
                 type="submit"
-                disabled={status === "loading"}
+                disabled={status === "loading" || !captchaToken}
                 className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {status === "loading" ? content.sending : content.send}
@@ -235,7 +278,7 @@ export default function Contact({ locale }: ContactProps) {
                   </p>
                 )}
 
-                {status === "error" && (
+                {status === "error" && captchaToken && (
                   <p className="rounded-lg bg-red-50 p-4 text-sm text-red-700">
                     {content.error}
                   </p>
