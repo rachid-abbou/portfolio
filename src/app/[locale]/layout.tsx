@@ -1,6 +1,7 @@
 
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import JsonLd from "@/components/seo/JsonLd";
 import Header from "@/components/layout/Header";
 
 type LocaleLayoutProps = {
@@ -51,6 +52,14 @@ export async function generateMetadata({
         locale: "fr_FR",
         alternateLocale: ["en_US"],
         siteName: "Portfolio Rachid Abbou",
+        images: [
+          {
+            url: "/og-image.png",
+            //width: 1672,
+            //height: 941,
+            alt: "Rachid Abbou - Développeur Full Stack",
+          },
+        ],
       },
     };
   }
@@ -88,6 +97,12 @@ export async function generateMetadata({
       locale: "en_US",
       alternateLocale: ["fr_FR"],
       siteName: "Rachid Abbou Portfolio",
+      images: [
+        {
+          url: "/og-image.png",
+          alt: "Rachid Abbou - Full Stack Developer",
+        },
+      ],
     },
   };
 }
@@ -104,6 +119,7 @@ export default async function LocaleLayout({
 
   return (
     <div lang={locale} className="min-h-screen">
+      <JsonLd locale={locale} />
       <Header locale={locale} />
       {children}
     </div>

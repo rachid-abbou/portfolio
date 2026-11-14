@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-const siteUrl = "https://VOTRE-DOMAINE";
+const siteUrl = "https://rachid-abbou-portfolio.pages.dev";
 
 export const dynamic = "force-static";
 

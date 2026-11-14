@@ -14,13 +14,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://rachid-abbou-portfolio.pages.dev"),
+
   title: {
     default: "Rachid Abbou | Développeur Full Stack",
     template: "%s | Rachid Abbou",
   },
+
   description:
     "Portfolio de Rachid Abbou, développeur Full Stack spécialisé dans les applications métier, les logiciels industriels et l'intégration de systèmes.",
+
   applicationName: "Portfolio Rachid Abbou",
+
   robots: {
     index: true,
     follow: true,
