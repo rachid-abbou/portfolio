@@ -243,7 +243,7 @@ export default function Contact({ locale }: ContactProps) {
                 />
               </div>
 
-              <div className="flex justify-center">
+              {/* <div className="flex justify-center">
                 <HCaptcha
                   key={captchaKey}
                   sitekey={HCAPTCHA_SITE_KEY}
@@ -255,8 +255,21 @@ export default function Contact({ locale }: ContactProps) {
                   onExpire={() => setCaptchaToken("")}
                   onError={() => setCaptchaToken("")}
                 />
+              </div> */}
+              <div className="flex justify-center">
+                <HCaptcha
+                  key={captchaKey}
+                  sitekey={HCAPTCHA_SITE_KEY}
+                  reCaptchaCompat={false}
+                  languageOverride={locale === "fr" ? "fr" : "en"}
+                  onVerify={(token) => {
+                    setCaptchaToken(token);
+                    setStatus("idle");
+                  }}
+                  onExpire={() => setCaptchaToken("")}
+                  onError={() => setCaptchaToken("")}
+                />
               </div>
-
               {status === "error" && !captchaToken && (
                 <p className="text-sm text-red-600">
                   {content.captchaRequired}

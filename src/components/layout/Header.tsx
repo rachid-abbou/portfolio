@@ -1,5 +1,6 @@
 
 import Link from "next/link";
+import NextImage from "next/image";
 
 type HeaderProps = {
   locale: string;
@@ -35,9 +36,11 @@ export default function Header({ locale }: HeaderProps) {
           className="flex items-center gap-3"
           aria-label="Accueil"
         >
-          <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-950 text-lg font-bold text-cyan-400">
+          {/* <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-slate-950 text-lg font-bold text-cyan-400">
             RA
-          </span>
+          </span> */}
+          <NextImage src="/logo.png" alt="Logo Rachid Abbou" width={44}
+            height={44} className="h-11 w-11 object-contain" priority unoptimized/>
 
           <span className="text-lg font-bold tracking-tight text-slate-900">
             Portfolio
